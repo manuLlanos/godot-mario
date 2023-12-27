@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://of6vl0wnd1ej"]
+
+[ext_resource type="Texture2D" uid="uid://cqr5gp6lrplvf" path="res://graphics/koopa-spritesheet.png" id="1_daicf"]
+[ext_resource type="Script" path="res://scenes/enemies/koopa.gd" id="1_ejkln"]
+[ext_resource type="PackedScene" uid="uid://b82uwxk4j04aw" path="res://scenes/components/hitbox.tscn" id="2_1lfc6"]
+[ext_resource type="PackedScene" uid="uid://6jygrvl4spsm" path="res://scenes/components/hurtbox.tscn" id="3_3gtpo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dls6n"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bmn3"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl0rk"]
+size = Vector2(23, 24)
+
+[sub_resource type="Animation" id="Animation_kgdkg"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ll2x"]
+_data = {
+"walk": SubResource("Animation_kgdkg")
+}
+
+[node name="Koopa" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_ejkln")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_dls6n")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_1lfc6")]
+unique_name_in_owner = true
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_5bmn3")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_3gtpo")]
+unique_name_in_owner = true
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_sl0rk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, 0)
+texture = ExtResource("1_daicf")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_5ll2x")
+}
+autoplay = "walk"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-15, -14, 30, 30)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://debmmv2782vvc"]
+
+[ext_resource type="Script" path="res://scenes/world/question_tile.gd" id="1_0v1rb"]
+[ext_resource type="Texture2D" uid="uid://b8dgxoa3f3a31" path="res://graphics/mystery-box.png" id="1_18oao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amvaj"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_e5n4d"]
+resource_name = "shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0), Vector2(0, 4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjare"]
+_data = {
+"shake": SubResource("Animation_e5n4d")
+}
+
+[node name="QuestionTile" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_0v1rb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_amvaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_18oao")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qjare")
+}

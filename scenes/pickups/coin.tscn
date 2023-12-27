@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck6ct8xawbw1w"]
+
+[ext_resource type="Texture2D" uid="uid://dfu2o4gu088lk" path="res://graphics/coin.png" id="1_24khd"]
+[ext_resource type="Script" path="res://scenes/pickups/coin.gd" id="1_dwnep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j85qd"]
+size = Vector2(22, 32)
+
+[sub_resource type="Animation" id="Animation_eunwd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n03bi"]
+resource_name = "spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 32), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j5t6s"]
+_data = {
+"RESET": SubResource("Animation_eunwd"),
+"spawn": SubResource("Animation_n03bi")
+}
+
+[node name="Coin" type="Area2D"]
+z_index = -1
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_dwnep")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_24khd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j85qd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j5t6s")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

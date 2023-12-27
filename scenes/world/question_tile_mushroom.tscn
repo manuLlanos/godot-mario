@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4c2iukxhjqiu"]
+
+[ext_resource type="PackedScene" uid="uid://debmmv2782vvc" path="res://scenes/world/question_tile.tscn" id="1_i5o8l"]
+[ext_resource type="Script" path="res://scenes/world/QuestionTileMushroom.gd" id="2_hxbs6"]
+
+[node name="QuestionTileMushroom" instance=ExtResource("1_i5o8l")]
+script = ExtResource("2_hxbs6")

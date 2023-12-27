@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://nwj04q3f388f"]
+
+[ext_resource type="PackedScene" uid="uid://debmmv2782vvc" path="res://scenes/world/question_tile.tscn" id="1_qqk8o"]
+[ext_resource type="Script" path="res://scenes/world/QuestionTileCoin.gd" id="2_v6wdd"]
+
+[node name="QuestionTileCoin" instance=ExtResource("1_qqk8o")]
+script = ExtResource("2_v6wdd")

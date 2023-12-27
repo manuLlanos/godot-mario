@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctj137u8ax53a"]
+
+[ext_resource type="Texture2D" uid="uid://s08bqm74d5uo" path="res://graphics/power-mushroom.png" id="1_64isl"]
+[ext_resource type="Script" path="res://scenes/pickups/mushroom.gd" id="1_o3ri8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8cam"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_tblkr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2oaei"]
+resource_name = "spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 32), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxvbi"]
+_data = {
+"RESET": SubResource("Animation_tblkr"),
+"spawn": SubResource("Animation_2oaei")
+}
+
+[node name="Mushroom" type="Area2D"]
+z_index = -1
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_o3ri8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_64isl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i8cam")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cxvbi")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

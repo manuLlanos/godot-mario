@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6wda865iw7a2"]
+
+[ext_resource type="Texture2D" uid="uid://clgdj7prtuogn" path="res://graphics/koopa-shell.png" id="1_72ml2"]
+[ext_resource type="Script" path="res://scenes/enemies/koopa_shell.gd" id="1_v0s7a"]
+[ext_resource type="PackedScene" uid="uid://6jygrvl4spsm" path="res://scenes/components/hurtbox.tscn" id="2_mt2lh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n25q4"]
+size = Vector2(23, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i28go"]
+size = Vector2(19, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4r5gh"]
+size = Vector2(23, 18)
+
+[node name="KoopaShell" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_v0s7a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_n25q4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_72ml2")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_mt2lh")]
+unique_name_in_owner = true
+collision_layer = 2
+monitorable = false
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_i28go")
+
+[node name="PlayerTouch" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTouch"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_4r5gh")
+debug_color = Color(0.356863, 0.619608, 0.0431373, 0.419608)
+
+[connection signal="body_entered" from="PlayerTouch" to="." method="_on_player_touch_body_entered"]
+
+[editable path="Hurtbox"]

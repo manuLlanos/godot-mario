@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://vgyfbar8hbw5"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_gvdf4"]
+[ext_resource type="Texture2D" uid="uid://c8v4rx5l5gbb2" path="res://graphics/background-hills.png" id="1_qjmuy"]
+[ext_resource type="Texture2D" uid="uid://bm528w0kduqc8" path="res://graphics/clouds.png" id="2_s0oni"]
+[ext_resource type="Texture2D" uid="uid://dxxv74vw37ecw" path="res://graphics/spritesheet.png" id="3_fa6fd"]
+[ext_resource type="PackedScene" uid="uid://dte4f7ypyb0gj" path="res://scenes/world/interactive_tilemap.tscn" id="4_gb5a2"]
+[ext_resource type="PackedScene" uid="uid://c7v3nq8uwjk5f" path="res://scenes/player/player.tscn" id="5_s7he7"]
+[ext_resource type="PackedScene" uid="uid://bseixuiywfffo" path="res://scenes/world/kill_area.tscn" id="9_fmola"]
+[ext_resource type="PackedScene" uid="uid://rfhra3tq811h" path="res://scenes/world/castle.tscn" id="9_fnpal"]
+[ext_resource type="PackedScene" uid="uid://uljnxxfaf7lf" path="res://scenes/ui/ui.tscn" id="10_0tj8f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ya01l"]
+texture = ExtResource("3_fa6fd")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_f5dur"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_ya01l")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dew6"]
+size = Vector2(6208, 64)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_gvdf4")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 1)
+motion_mirroring = Vector2(800, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Background"]
+position = Vector2(400, 300)
+texture = ExtResource("1_qjmuy")
+
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(800, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Clouds"]
+position = Vector2(363, 234)
+texture = ExtResource("2_s0oni")
+
+[node name="WorldTiles" type="TileMap" parent="."]
+z_index = 1
+tile_set = SubResource("TileSet_f5dur")
+format = 2
+layer_0/tile_data = PackedInt32Array(1114112, 0, 0, 1179648, 0, 0, 1245184, 0, 0, 1114113, 0, 0, 1179649, 0, 0, 1245185, 0, 0, 1114114, 0, 0, 1179650, 0, 0, 1245186, 0, 0, 1114115, 0, 0, 1179651, 0, 0, 1245187, 0, 0, 1114116, 0, 0, 1179652, 0, 0, 1245188, 0, 0, 1114117, 0, 0, 1179653, 0, 0, 1245189, 0, 0, 1114118, 0, 0, 1179654, 0, 0, 1245190, 0, 0, 1114119, 0, 0, 1179655, 0, 0, 1245191, 0, 0, 1114120, 0, 0, 1179656, 0, 0, 1245192, 0, 0, 1114121, 0, 0, 1179657, 0, 0, 1245193, 0, 0, 1114122, 0, 0, 1179658, 0, 0, 1245194, 0, 0, 1114123, 0, 0, 1179659, 0, 0, 1245195, 0, 0, 1114124, 0, 0, 1179660, 0, 0, 1245196, 0, 0, 1114125, 0, 0, 1179661, 0, 0, 1245197, 0, 0, 1114126, 0, 0, 1179662, 0, 0, 1245198, 0, 0, 1114127, 0, 0, 1179663, 0, 0, 1245199, 0, 0, 1114128, 0, 0, 1179664, 0, 0, 1245200, 0, 0, 1114129, 0, 0, 1179665, 0, 0, 1245201, 0, 0, 1114130, 0, 0, 1179666, 0, 0, 1245202, 0, 0, 1114131, 0, 0, 1179667, 0, 0, 1245203, 0, 0, 1114132, 0, 0, 1179668, 0, 0, 1245204, 0, 0, 1114133, 0, 0, 1179669, 0, 0, 1245205, 0, 0, 1114134, 0, 0, 1179670, 0, 0, 1245206, 0, 0, 1114135, 0, 0, 1179671, 0, 0, 1245207, 0, 0, 1114136, 0, 0, 1179672, 0, 0, 1245208, 0, 0, 1114137, 0, 0, 1179673, 0, 0, 1245209, 0, 0, 1114138, 0, 0, 1179674, 0, 0, 1245210, 0, 0, 1114139, 0, 0, 1179675, 0, 0, 1245211, 0, 0, 1114140, 0, 0, 1179676, 0, 0, 1245212, 0, 0, 1114141, 0, 0, 1179677, 0, 0, 1245213, 0, 0, 1179643, 0, 0, 1245179, 0, 0, 1310715, 0, 0, 1179644, 0, 0, 1245180, 0, 0, 1310716, 0, 0, 1179645, 0, 0, 1245181, 0, 0, 1310717, 0, 0, 1179646, 0, 0, 1245182, 0, 0, 1310718, 0, 0, 1179647, 0, 0, 1245183, 0, 0, 1310719, 0, 0)
+
+[node name="InteractiveTiles" parent="." instance=ExtResource("4_gb5a2")]
+
+[node name="Player" parent="." instance=ExtResource("5_s7he7")]
+unique_name_in_owner = true
+position = Vector2(107, 528)
+
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Castle" parent="." instance=ExtResource("9_fnpal")]
+position = Vector2(690, 544)
+
+[node name="UI" parent="." instance=ExtResource("10_0tj8f")]
+unique_name_in_owner = true
+
+[node name="CameraLimit1" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-128, 512)
+
+[node name="CameraLimit2" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(928, 512)
+
+[node name="KillArea" parent="." instance=ExtResource("9_fmola")]
+position = Vector2(-192, 640)
+
+[node name="CollisionShape2D" parent="KillArea" index="0"]
+position = Vector2(640, 32)
+shape = SubResource("RectangleShape2D_3dew6")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="level_won" from="Castle" to="." method="_on_castle_level_won"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="KillArea"]

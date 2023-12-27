@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dte4f7ypyb0gj"]
+
+[ext_resource type="Texture2D" uid="uid://xh2lxs1hdytc" path="res://graphics/interactive-tilesheet.png" id="1_h52np"]
+[ext_resource type="Script" path="res://scenes/world/interactive_tilemap.gd" id="1_lvdrh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t66eb"]
+texture = ExtResource("1_h52np")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+2:0/0 = 0
+2:0/0/custom_data_0 = 2
+
+[sub_resource type="TileSet" id="TileSet_eop2p"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "interactive"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetAtlasSource_t66eb")
+
+[node name="InteractiveTilemap" type="TileMap"]
+tile_set = SubResource("TileSet_eop2p")
+format = 2
+script = ExtResource("1_lvdrh")

@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://d4gqdvptynta4"]
+
+[ext_resource type="Script" path="res://scenes/globals/audio_manager.gd" id="1_w8lea"]
+[ext_resource type="AudioStream" uid="uid://cfvl5qudwkilv" path="res://sounds/break.wav" id="2_vkb32"]
+[ext_resource type="AudioStream" uid="uid://vwd8ymrrwm1q" path="res://sounds/jump_retro.wav" id="3_up3f4"]
+[ext_resource type="AudioStream" uid="uid://b2fshffqruoxh" path="res://sounds/coin.wav" id="4_cma2e"]
+[ext_resource type="AudioStream" uid="uid://bwy5m6hnyqw36" path="res://sounds/player-death.wav" id="4_ji1ii"]
+[ext_resource type="AudioStream" uid="uid://cl8am7y37r7y7" path="res://sounds/powerdown.wav" id="5_fp1nd"]
+[ext_resource type="AudioStream" uid="uid://le7wmd5qwonm" path="res://sounds/powerup.wav" id="7_udmo4"]
+[ext_resource type="AudioStream" uid="uid://djfagfsegpnud" path="res://sounds/stomp.wav" id="8_dflcq"]
+[ext_resource type="AudioStream" uid="uid://dwro2cc2qawks" path="res://sounds/supermario_godot_theme.mp3" id="9_0apqf"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_w8lea")
+
+[node name="Break" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vkb32")
+volume_db = -15.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_up3f4")
+
+[node name="Coin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cma2e")
+volume_db = -5.0
+
+[node name="PlayerDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ji1ii")
+volume_db = -10.0
+
+[node name="PowerDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fp1nd")
+volume_db = -15.0
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_udmo4")
+volume_db = -15.0
+
+[node name="Stomp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_dflcq")
+volume_db = -15.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0apqf")
+volume_db = -20.0
+autoplay = true

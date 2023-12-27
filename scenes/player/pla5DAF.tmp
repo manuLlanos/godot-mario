@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://c7v3nq8uwjk5f"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_mbu5d"]
+[ext_resource type="PackedScene" uid="uid://b82uwxk4j04aw" path="res://scenes/components/hitbox.tscn" id="2_afv72"]
+[ext_resource type="Texture2D" uid="uid://dgu3mv3ldiytv" path="res://graphics/mario-spritesheet.png" id="2_wvu2g"]
+[ext_resource type="PackedScene" uid="uid://6jygrvl4spsm" path="res://scenes/components/hurtbox.tscn" id="3_x7gtx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7vxof"]
+size = Vector2(26, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mj38"]
+size = Vector2(26, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j617c"]
+size = Vector2(26, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_537ku"]
+size = Vector2(14, 2)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_mbu5d")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.972549, 0, 0, 1)
+texture = ExtResource("2_wvu2g")
+hframes = 7
+vframes = 5
+region_rect = Rect2(0, 0, 26, 32)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_7vxof")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(181, -109)
+limit_top = -1
+limit_bottom = 1
+
+[node name="Hitbox" parent="." instance=ExtResource("2_afv72")]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 20
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_7mj38")
+
+[node name="StompHurtbox" parent="." instance=ExtResource("3_x7gtx")]
+unique_name_in_owner = true
+position = Vector2(0, 17)
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="StompHurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_j617c")
+
+[node name="JumpHurtbox" parent="." instance=ExtResource("3_x7gtx")]
+unique_name_in_owner = true
+position = Vector2(0, -18)
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="JumpHurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_537ku")
+
+[editable path="Hitbox"]
+[editable path="StompHurtbox"]
+[editable path="JumpHurtbox"]
